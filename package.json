@@ -1,0 +1,5 @@
+{
+  "devDependencies": {
+    "eslint-config-trybe-backend": "^1.0.4"
+  }
+}
