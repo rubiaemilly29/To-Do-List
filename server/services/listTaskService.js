@@ -8,6 +8,12 @@ const create = async (task) => {
   return { status: 201, message: [listCreated] };
 };
 
+const getAll = async () => {
+  const listGetAll = await listTaskModels.getAll();
+return { status: 200, message: listGetAll };
+};
+
 module.exports = {
   create,
+  getAll,
 };

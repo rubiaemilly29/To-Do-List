@@ -10,6 +10,13 @@ const create = async (listTask) => {
   return { _id: inserted.insertedId, task, status, date: ops[0].date };
 };
 
+const getAll = async () => {
+const db = await connection();
+const allTask = await db.collection('listTask').find().toArray();
+return allTask;
+};
+
 module.exports = {
   create,
+  getAll,
 };
