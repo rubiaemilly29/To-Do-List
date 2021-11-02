@@ -1,5 +1,5 @@
-/* const { ObjectId } = require('mongodb');
- */const connection = require('../connection/conn');
+/* const { ObjectId } = require('mongodb'); */
+const connection = require('../connection/conn');
 
 const create = async (listTask) => {
   const { task, status } = listTask;
@@ -23,8 +23,15 @@ const allTask = await db.collection('listTask').find().sort({ date: -1 }).toArra
 return allTask;
 };
 
+const searchStatus = async (status) => {
+const db = await connection();
+const allTask = await db.collection('listTask').find({ status: `${status}` }).toArray();
+return allTask;
+};
+
 module.exports = {
   create,
   getAll,
   searchByDescendingDate,
+  searchStatus,
 };

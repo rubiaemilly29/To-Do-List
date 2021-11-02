@@ -5,24 +5,29 @@ const create = async (req, res) => {
   res.status(listCreated.status).json(listCreated.message);
 };
 
-const searchByAscendingCreationOrder = async (req, res) => {
-const listGetAll = await listTaskService.searchByAscendingCreationOrder();
-res.status(listGetAll.status).json(listGetAll.message);
+const searchByAscendingCreationOrder = async (_req, res) => {
+const listCreateOrderAsc = await listTaskService.searchByAscendingCreationOrder();
+res.status(listCreateOrderAsc.status).json(listCreateOrderAsc.message);
 };
 
-const searchByDescendingCreationOrder = async (req, res) => {
-const listGetAll = await listTaskService.searchByDescendingCreationOrder();
-res.status(listGetAll.status).json(listGetAll.message);
+const searchByDescendingCreationOrder = async (_req, res) => {
+const listCreateOrderDesc = await listTaskService.searchByDescendingCreationOrder();
+res.status(listCreateOrderDesc.status).json(listCreateOrderDesc.message);
 };
 
-const alphabeticalSearchAscending = async (req, res) => {
-const listGetAll = await listTaskService.alphabeticalSearchAscending();
-res.status(listGetAll.status).json(listGetAll.message);
+const alphabeticalSearchAscending = async (_req, res) => {
+const listAlphabeticalAsc = await listTaskService.alphabeticalSearchAscending();
+res.status(listAlphabeticalAsc.status).json(listAlphabeticalAsc.message);
 };
 
-const alphabeticalSearchDescending = async (req, res) => {
-const listGetAll = await listTaskService.alphabeticalSearchDescending();
-res.status(listGetAll.status).json(listGetAll.message);
+const alphabeticalSearchDescending = async (_req, res) => {
+const listAlphabeticalDesc = await listTaskService.alphabeticalSearchDescending();
+res.status(listAlphabeticalDesc.status).json(listAlphabeticalDesc.message);
+};
+
+const searchByStatus = async (req, res) => {
+const listStatus = await listTaskService.searchStatus(req.query);
+res.status(listStatus.status).json(listStatus.message);
 };
 
 module.exports = {
@@ -31,4 +36,5 @@ module.exports = {
   searchByDescendingCreationOrder,
   alphabeticalSearchAscending,
   alphabeticalSearchDescending,
+  searchByStatus,
 };

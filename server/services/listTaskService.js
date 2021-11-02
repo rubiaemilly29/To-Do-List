@@ -38,10 +38,19 @@ if (a.date < b.date) return 1;
 return { status: 200, message: listGetAll };
 };
 
+const searchStatus = async (status) => {
+  if (!status || status.status === '') {
+    return { status: 400, message: { mensagem: 'Status não preenchidos' } };
+  }
+const listGetAll = await listTaskModels.searchStatus(status.status);
+return { status: 200, message: listGetAll };
+};
+
 module.exports = {
   create,
   searchByAscendingCreationOrder,
   searchByDescendingCreationOrder,
   alphabeticalSearchAscending,
   alphabeticalSearchDescending,
+  searchStatus,
 };
