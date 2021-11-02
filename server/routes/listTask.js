@@ -11,4 +11,6 @@ router.post('/', listTaskControllers.create);
 
 router.put('/:id', listTaskControllers.updateList);
 
+router.delete('/:id', listTaskControllers.deleteList);
+
 module.exports = router;

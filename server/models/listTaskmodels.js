@@ -1,4 +1,4 @@
-/* const { ObjectId } = require('mongodb'); */
+const { ObjectId } = require('mongodb');
 const connection = require('../connection/conn');
 
 const create = async (listTask) => {
@@ -11,9 +11,9 @@ const create = async (listTask) => {
   return { _id: inserted.insertedId, task, status, date: ops[0].date };
 };
 
-const getAll = async () => {
+const searchByAscendingDate = async () => {
 const db = await connection();
-const allTask = await db.collection('listTask').find().toArray();
+const allTask = await db.collection('listTask').find().sort({ date: 1 }).toArray();
 return allTask;
 };
 
@@ -29,9 +29,33 @@ const allTask = await db.collection('listTask').find({ status: `${status}` }).to
 return allTask;
 };
 
+async function updateList(id, task, status) {
+  if (!ObjectId.isValid(id)) {
+     return null;
+   }
+const date = new Date();
+const db = await connection();
+await db.collection('listTask')
+  .updateOne({ _id: ObjectId(id) }, { $set: { task, status, date } });
+return { id, task, status, date };
+}
+
+async function deleteList(id) {
+if (!ObjectId.isValid(id)) {
+      return null;
+}
+const db = await connection();
+const list = await db.collection('listTask').deleteOne({ _id: ObjectId(id) });
+console.log(list);
+return list;
+}
+
 module.exports = {
   create,
-  getAll,
+  searchByAscendingDate,
   searchByDescendingDate,
   searchStatus,
+  updateList,
+  deleteList,
+
 };

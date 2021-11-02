@@ -30,6 +30,16 @@ const listStatus = await listTaskService.searchStatus(req.query);
 res.status(listStatus.status).json(listStatus.message);
 };
 
+const updateList = async (req, res) => {
+  const listUpdate = await listTaskService.updateList(req.params.id, req.body);
+  res.status(listUpdate.status).json(listUpdate.message);
+};
+
+const deleteList = async (req, res) => {
+  const listDelete = await listTaskService.deleteList(req.params.id);
+  res.status(listDelete.status).json(listDelete.message);
+};
+
 module.exports = {
   create,
   searchByAscendingCreationOrder,
@@ -37,4 +47,6 @@ module.exports = {
   alphabeticalSearchAscending,
   alphabeticalSearchDescending,
   searchByStatus,
+  updateList,
+  deleteList,
 };
