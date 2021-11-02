@@ -1,4 +1,4 @@
-# Boas vindas ao repositório do projeto To Do List!
+# Boas vindas ao repositório do projeto List Task!
 
 Esse é  um projeto para organização de tarefas, que utiliza do mongodb local para o banco de dados, é necessario a previa instalacao do [mongodb](https://docs.mongodb.com/manual/installation/).
 
@@ -34,18 +34,22 @@ Esse é  um projeto para organização de tarefas, que utiliza do mongodb local 
 
 ## Funcionalidades:
   
-  1. Visualizar a lista de tarefas;
-  - Esta lista deve ser ordenável por ordem alfabética, data de criação ou por status;
+  1. Visualizar a lista de tarefas, Esta lista deve ser ordenável por:
+  - Ordem alfabética; 
+  - Data de criação;
+  - Status,
 
-  2. CRUD
+  2. A tarefa deve possuir um status editável: 
+  - pendente; 
+  - em andamento;
+  - pronto,
+
+  3. O List Task deve ser capaz de: 
   - Inserir uma nova tarefa na lista;
-
   - Remover uma tarefa da lista;
+  - Atualizar uma tarefa da lista,
 
-  - Atualizar uma tarefa da lista;
-
-  3. A tarefa deve possuir um status editável 
-  - pendente, em andamento ou pronto;
+  
 
 ---
 
