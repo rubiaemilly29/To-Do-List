@@ -26,7 +26,7 @@ res.status(listAlphabeticalDesc.status).json(listAlphabeticalDesc.message);
 };
 
 const searchByStatus = async (req, res) => {
-const listStatus = await listTaskService.searchStatus(req.query);
+const listStatus = await listTaskService.searchStatus(req.params);
 res.status(listStatus.status).json(listStatus.message);
 };
 

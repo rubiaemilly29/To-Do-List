@@ -9,12 +9,22 @@ return { status: 201, message: [listCreated] };
 };
 
 const searchByAscendingCreationOrder = async () => {
-const listGetAll = await listTaskModels.searchByAscendingDate();
+const listGetAll = await listTaskModels.getAll();
+listGetAll.sort((a, b) => {
+if (a.date < b.date) return -1;
+    if (a.date > b.date) return 1;
+    return 0;
+});
 return { status: 200, message: listGetAll };
 };
 
 const searchByDescendingCreationOrder = async () => {
-const listGetAll = await listTaskModels.searchByDescendingDate();
+const listGetAll = await listTaskModels.getAll();
+listGetAll.sort((a, b) => {
+if (a.date < b.date) return 1;
+    if (a.date > b.date) return -1;
+    return 0;
+});
 return { status: 200, message: listGetAll };
 };
 
@@ -31,23 +41,24 @@ return { status: 200, message: listGetAll };
 const alphabeticalSearchDescending = async () => {
 const listGetAll = await listTaskModels.getAll();
 listGetAll.sort((a, b) => {
-if (a.date < b.date) return 1;
-    if (a.date > b.date) return -1;
+if (a.task.toLowerCase() < b.task.toLowerCase()) return 1;
+    if (a.task.toLowerCase() > b.task.toLowerCase()) return -1;
     return 0;
 });
 return { status: 200, message: listGetAll };
 };
 
 const searchStatus = async (status) => {
-  if (!status || status.status === '') {
+const statusCor = 'pendente' || 'em andamento' || 'pronto';
+
+if (!status.status || status.status !== statusCor) {
     return { status: 400, message: { mensagem: 'Status não preenchidos' } };
   }
-const listGetAll = await listTaskModels.searchStatus(status.status);
+const listGetAll = await listTaskModels.getStatus(status.status);
 return { status: 200, message: listGetAll };
 };
 
-async function updateList(id, body) {
-  console.log(id, body);
+ const updateList = async (id, body) => {
 if (!body.task || !body.status || !id) {
     return { status: 422, message: { mensagem: 'Task, Id ou Status não preenchidos' } };
 }
@@ -60,15 +71,15 @@ if (!setTask) {
     return { status: 400, message: { mensagem: 'id inválido' } };
 }
 return { status: 200, message: setTask };
-}
+};
 
-async function deleteList(id) {
+const deleteList = async (id) => {
 const delList = await listTaskModels.deleteList(id);
 if (!delList) {
   return { status: 422, message: { mensagem: 'id inválido' } };
 }
 return { status: 200, message: { mensagem: 'Tarefa apagada' } };
-}
+};
 
 module.exports = {
   create,
