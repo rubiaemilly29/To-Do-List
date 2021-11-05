@@ -5,22 +5,27 @@ const create = async (listTask) => {
   const { task, status } = listTask;
   const date = new Date();
   const db = await connection();
-  const inserted = await db.collection('listTask').insertOne({ task, status, date });
+  const inserted = await db
+    .collection('listTask')
+    .insertOne({ task, status, date });
   const { ops } = inserted;
 
-  return { _id: inserted.insertedId, task, status, date: ops[0].date };
+  return { id: inserted.insertedId, task, status, date: ops[0].date };
 };
 
 const getAll = async () => {
   const db = await connection();
   const allTask = await db.collection('listTask').find().toArray();
   return allTask;
-}
+};
 
-const getStatus = async (status) => {
-const db = await connection();
-const allTask = await db.collection('listTask').find({ status: `${status}` }).toArray();
-return allTask;
+const getStatus = async (statusProp) => {
+  const db = await connection();
+  const allTask = await db
+    .collection('listTask')
+    .find({ status: `${statusProp}` })
+    .toArray();
+  return allTask;
 };
 
 const updateList = async (id, task, status) => {
@@ -29,7 +34,8 @@ const updateList = async (id, task, status) => {
   }
   const date = new Date();
   const db = await connection();
-  await db.collection('listTask')
+  await db
+    .collection('listTask')
     .updateOne({ _id: ObjectId(id) }, { $set: { task, status, date } });
   return { id, task, status, date };
 };
@@ -49,7 +55,7 @@ const deleteManyTest = async () => {
 };
 const createManyTest = async (listTask) => {
   const db = await connection();
-  const inserted = await db.collection('listTask').insertMany(listTask);
+  await db.collection('listTask').insertMany(listTask);
 };
 
 module.exports = {

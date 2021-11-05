@@ -6,28 +6,28 @@ const create = async (req, res) => {
 };
 
 const searchByAscendingCreationOrder = async (_req, res) => {
-const listCreateOrderAsc = await listTaskService.searchByAscendingCreationOrder();
-res.status(listCreateOrderAsc.status).json(listCreateOrderAsc.message);
+  const listCreateOrderAsc = await listTaskService.searchByAscendingCreationOrder();
+  res.status(listCreateOrderAsc.status).json(listCreateOrderAsc.message);
 };
 
 const searchByDescendingCreationOrder = async (_req, res) => {
-const listCreateOrderDesc = await listTaskService.searchByDescendingCreationOrder();
-res.status(listCreateOrderDesc.status).json(listCreateOrderDesc.message);
+  const listCreateOrderDesc = await listTaskService.searchByDescendingCreationOrder();
+  res.status(listCreateOrderDesc.status).json(listCreateOrderDesc.message);
 };
 
 const alphabeticalSearchAscending = async (_req, res) => {
-const listAlphabeticalAsc = await listTaskService.alphabeticalSearchAscending();
-res.status(listAlphabeticalAsc.status).json(listAlphabeticalAsc.message);
+  const listAlphabeticalAsc = await listTaskService.alphabeticalSearchAscending();
+  res.status(listAlphabeticalAsc.status).json(listAlphabeticalAsc.message);
 };
 
 const alphabeticalSearchDescending = async (_req, res) => {
-const listAlphabeticalDesc = await listTaskService.alphabeticalSearchDescending();
-res.status(listAlphabeticalDesc.status).json(listAlphabeticalDesc.message);
+  const listAlphabeticalDesc = await listTaskService.alphabeticalSearchDescending();
+  res.status(listAlphabeticalDesc.status).json(listAlphabeticalDesc.message);
 };
 
 const searchByStatus = async (req, res) => {
-const listStatus = await listTaskService.searchStatus(req.params);
-res.status(listStatus.status).json(listStatus.message);
+  const listStatus = await listTaskService.searchStatus(req.params);
+  res.status(listStatus.status).json(listStatus.message);
 };
 
 const updateList = async (req, res) => {
