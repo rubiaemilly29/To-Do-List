@@ -7,20 +7,23 @@ export default function TaskList() {
   const [task, settask] = useState([]);
   const [value, setvalue] = useState('');
 
-  async function createlist() {
-    await axios.post('http://localhost:3003/listTask', {
-      task: value,
-      status: 'pendente',
-    }).then((res) => console.log(res));
-    await axios
+  async function getList() {
+    return axios
       .get('http://localhost:3003/listTask/searchCreationOrder/ascending')
       .then((response) => {
-        console.log(response);
         settask(response.data);
       })
       .catch((error) => {
         console.log(error);
       });
+  }
+
+  async function createlist() {
+    await axios.post('http://localhost:3003/listTask', {
+      task: value,
+      status: 'pendente',
+    }).then((res) => console.log(res.data));
+    await getList();
   }
 
   useEffect(() => {
@@ -54,7 +57,7 @@ export default function TaskList() {
       </Stack>
       <ul>
         {task.map((list, index) => (
-          <Task list={ list } key={ index } settask={ settask } />
+          <Task list={ list } key={ index } getList={ getList } task={ task } />
         ))}
       </ul>
     </Container>
