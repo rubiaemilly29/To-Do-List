@@ -36,8 +36,36 @@ Esse é  um projeto para organização de tarefas, que utiliza do mongodb local 
   
   1. Visualizar a lista de tarefas, Esta lista deve ser ordenável por:
   - Ordem alfabética; 
+    - Acendente:
+    ```
+    http://localhost:3003/listTask/alphabeticalSearch/ascending
+    ```
+    - Descendente:
+    ```
+    http://localhost:3003/listTask/alphabeticalSearch/descending
+    ```
   - Data de criação;
+    - Acendente:
+    ```
+    http://localhost:3003/listTask/searchCreationOrder/ascending
+    ```
+    - Descendente:
+    ```
+    http://localhost:3003/listTask/searchCreationOrder/descending
+    ```
   - Status,
+    - Pendente:
+    ```
+    http://localhost:3003/listTask/searchStatus/pendente
+    ```
+    - Em andamento:
+    ```
+    http://localhost:3003/listTask/searchStatus/em_andamento
+    ```
+    - Pronto:
+    ```
+    http://localhost:3003/listTask/searchStatus/pronto
+    ```
 
   2. A tarefa deve possuir um status editável: 
   - pendente; 
@@ -46,11 +74,17 @@ Esse é  um projeto para organização de tarefas, que utiliza do mongodb local 
 
   3. O List Task deve ser capaz de: 
   - Inserir uma nova tarefa na lista;
+    ```
+    http://localhost:3003/listTask
+    ```
   - Remover uma tarefa da lista;
+    ```
+    http://localhost:3003/listTask/id
+    ```
   - Atualizar uma tarefa da lista,
-
-  
-
+    ```
+    http://localhost:3003/listTask/id
+    ```
 ---
 
 
@@ -63,15 +97,14 @@ sudo service mongod start
 
 Inicie o server:
 ```
-cd mern/server
+cd To-Do-List/server
 npm install
-npm install -g nodemon
-nodemon server
+npm start
 ```
 
 Inicie o client
 ```
-cd mern/client
+cd To-Do-List/client
 npm install
 npm start
 ```
