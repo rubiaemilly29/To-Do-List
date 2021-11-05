@@ -11,51 +11,53 @@ const create = async (listTask) => {
   return { _id: inserted.insertedId, task, status, date: ops[0].date };
 };
 
-const searchByAscendingDate = async () => {
-const db = await connection();
-const allTask = await db.collection('listTask').find().sort({ date: 1 }).toArray();
-return allTask;
-};
+const getAll = async () => {
+  const db = await connection();
+  const allTask = await db.collection('listTask').find().toArray();
+  return allTask;
+}
 
-const searchByDescendingDate = async () => {
-const db = await connection();
-const allTask = await db.collection('listTask').find().sort({ date: -1 }).toArray();
-return allTask;
-};
-
-const searchStatus = async (status) => {
+const getStatus = async (status) => {
 const db = await connection();
 const allTask = await db.collection('listTask').find({ status: `${status}` }).toArray();
 return allTask;
 };
 
-async function updateList(id, task, status) {
+const updateList = async (id, task, status) => {
   if (!ObjectId.isValid(id)) {
-     return null;
-   }
-const date = new Date();
-const db = await connection();
-await db.collection('listTask')
-  .updateOne({ _id: ObjectId(id) }, { $set: { task, status, date } });
-return { id, task, status, date };
-}
+    return null;
+  }
+  const date = new Date();
+  const db = await connection();
+  await db.collection('listTask')
+    .updateOne({ _id: ObjectId(id) }, { $set: { task, status, date } });
+  return { id, task, status, date };
+};
 
-async function deleteList(id) {
-if (!ObjectId.isValid(id)) {
-      return null;
-}
-const db = await connection();
-const list = await db.collection('listTask').deleteOne({ _id: ObjectId(id) });
-console.log(list);
-return list;
-}
+const deleteList = async (id) => {
+  if (!ObjectId.isValid(id)) {
+    return null;
+  }
+  const db = await connection();
+  const list = await db.collection('listTask').deleteOne({ _id: ObjectId(id) });
+  return list;
+};
+
+const deleteManyTest = async () => {
+  const db = await connection();
+  await db.collection('listTask').deleteMany({});
+};
+const createManyTest = async (listTask) => {
+  const db = await connection();
+  const inserted = await db.collection('listTask').insertMany(listTask);
+};
 
 module.exports = {
   create,
-  searchByAscendingDate,
-  searchByDescendingDate,
-  searchStatus,
+  getAll,
+  getStatus,
   updateList,
   deleteList,
-
+  deleteManyTest,
+  createManyTest,
 };

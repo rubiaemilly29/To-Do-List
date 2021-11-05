@@ -3,7 +3,7 @@ const listTaskControllers = require('../controllers/listTaskControllers');
 
 router.get('/', listTaskControllers.searchByAscendingCreationOrder);
 router.get('/searchCreationOrder/descending', listTaskControllers.searchByDescendingCreationOrder);
-router.get('/searchStatus/search', listTaskControllers.searchByStatus);
+router.get('/searchStatus/:status', listTaskControllers.searchByStatus);
 router.get('/alphabeticalSearch/ascending', listTaskControllers.alphabeticalSearchAscending);
 router.get('/alphabeticalSearch/descending', listTaskControllers.alphabeticalSearchDescending);
 
